@@ -28,17 +28,27 @@ The rmarkdown and knitr packages are also needed to render the R Markdown file.
 
 # Reproducing the Analysis
 
-1. Download or clone this repository.
+1. Download the repository as a ZIP file and extract its contents.
 
 2. Open STARS Analysis.Rmd in RStudio.
 
-3. Ensure that the required packages are installed.
+3. Install any missing R packages listed above.
 
-4. Keep stars-data_182.csv in the same directory as the R Markdown file.
+4. Ensure that Final Report.Rmd and stars-data_182.csv are located in the same folder.
 
-5. Run the code chunks in order or knit the R Markdown file to reproduce the analyses.
+5.  Knit in RStudio to run the analysis and generate an HTML report.
 
-The analyses include network construction, macro-level network measures, nominal assortativity, and Walktrap community detection.
+The R Markdown file contains the complete analysis, including:
+
+- Construction of a partial-correlation network using the 51 STARS items, retaining statistically significant associations.
+
+- Calculation of macro-level network measures, including average degree, density, clustering coefficient, average shortest-path length, and diameter.
+
+- Calculation of nominal assortativity using the six STARS factor classifications.
+
+- Walktrap community detection and modularity calculation.
+
+- Comparison of detected community membership with the established STARS factors.
 
 # Main Findings
 
