@@ -10,19 +10,23 @@ Using survey responses from 182 university students, a partial-correlation netwo
 
 # Repository Contents
 
-STARS Analysis.Rmd — R Markdown file containing the code for network construction and analysis.
+- `STARS Analysis.Rmd` — R Markdown file containing the code for network construction and analysis.
+  
+- `STARS Analysis.html` — Rendered HTML version of the R Markdown file, displaying the analysis code, results, and visualisations.
 
-stars-data_182.csv — Dataset containing the STARS responses from 182 students.
+- `stars-data_182.csv` — Dataset containing the STARS responses from 182 students.
+
+- `stars-item.md` — Reference document describing the 51 STARS items and their corresponding six factors.
 
 # Requirements
 
 The analysis was conducted in R using the following packages:
 
-- igraph
+- `igraph`
 
-- tidyverse
+- `tidyverse`
 
-- bootnet
+- `bootnet`
 
 The rmarkdown and knitr packages are also needed to render the R Markdown file.
 
@@ -30,11 +34,11 @@ The rmarkdown and knitr packages are also needed to render the R Markdown file.
 
 1. Download the repository as a ZIP file and extract its contents.
 
-2. Open STARS Analysis.Rmd in RStudio.
+2. Open `STARS Analysis.Rmd` in RStudio.
 
 3. Install any missing R packages listed above.
 
-4. Ensure that Final Report.Rmd and stars-data_182.csv are located in the same folder.
+4. Ensure that `STARS Analysis.Rmd` and `stars-data_182.csv` are located in the same folder.
 
 5.  Knit in RStudio to run the analysis and generate an HTML report.
 
