@@ -28,15 +28,15 @@ The rmarkdown and knitr packages are also needed to render the R Markdown file.
 
 # Reproducing the Analysis
 
-Download or clone this repository.
+1. Download or clone this repository.
 
-Open STARS Analysis.Rmd in RStudio.
+2. Open STARS Analysis.Rmd in RStudio.
 
-Ensure that the required packages are installed.
+3. Ensure that the required packages are installed.
 
-Keep stars-data_182.csv in the same directory as the R Markdown file.
+4. Keep stars-data_182.csv in the same directory as the R Markdown file.
 
-Run the code chunks in order or knit the R Markdown file to reproduce the analyses.
+5. Run the code chunks in order or knit the R Markdown file to reproduce the analyses.
 
 The analyses include network construction, macro-level network measures, nominal assortativity, and Walktrap community detection.
 
