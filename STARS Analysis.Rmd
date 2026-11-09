@@ -1,0 +1,128 @@
+---
+title: "PL4246 Final Report"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Preparing the STARS dataset
+```{r code1, echo=TRUE, eval=TRUE}
+
+# Load necessary libaries
+setwd("~/R files/Preliminary Report")
+library(igraph)
+library(tidyverse)
+library(bootnet)
+
+# Load STARS dataset
+data <- read.csv("stars-data_182.csv", header = TRUE)
+
+# Retain the 51 STARS items
+data <- data |> 
+  select(item_1:item_51)
+
+# Create partial correlation matrix from the 51 stars items
+stars_matrix <- estimateNetwork(data, default = "pcor", 
+                                threshold = 'sig') 
+
+# Extract matrix for conversion to igraph
+stars_adj_mat <- abs(stars_matrix$graph)
+isSymmetric(stars_adj_mat)
+stars_uw <- graph_from_adjacency_matrix(stars_adj_mat, mode = 'undirected', weighted = 'weight')
+
+summary(stars_uw)
+```
+
+# Macro-level network analysis
+```{r code2, echo=TRUE, eval=TRUE}
+
+# Check components
+stars_comp <- components(stars_uw)
+
+# Number of components
+stars_comp$no
+
+# Number of nodes in each component
+stars_comp$csize
+
+# 1. Average degree
+
+degree(stars_uw) |> mean() #5.019608
+
+# 2. Average shortest-path length
+
+mean_distance(stars_uw, directed = F, weights = NA)  #2.658039
+
+# 3. Global clustering coefficient
+
+transitivity(stars_uw, type = 'global') #0.2018349
+
+# 4. Network density
+
+edge_density(stars_uw) #0.1003922
+
+# 5. Network diameter
+
+diameter(stars_uw, directed = F, weights = NA) #6
+
+# 6. Assortative mixing
+# Create a vector of factor labels based on Hanna et al. (2008)
+
+V(stars_uw)$name # checking if STARS items are ordered correctly
+
+V(stars_uw)$factor <- NA
+
+V(stars_uw)$factor[c(1, 4, 8, 10, 13, 15, 21, 22)] <- 
+  "Test and Class Anxiety"
+
+V(stars_uw)$factor[c(2, 5, 6, 7, 9, 11, 12, 14, 17, 18, 20)] <- 
+  "Interpretation Anxiety"
+
+V(stars_uw)$factor[c(3, 16, 19, 23)] <- 
+  "Fear of Asking for Help"
+
+V(stars_uw)$factor[c(24, 26, 27, 28, 29, 33, 35, 36, 37, 40, 41, 42, 45, 47, 49, 50)] <- 
+  "Worth of Statistics"
+
+V(stars_uw)$factor[c(30, 32, 43, 44, 46)] <- 
+  "Fear of Statistics Teachers"
+
+V(stars_uw)$factor[c(25, 31, 34, 38, 39, 48, 51)] <- 
+  "Computational Self-Concept"
+
+table(V(stars_uw)$factor)
+
+
+assortativity_nominal(stars_uw, types = factor(V(stars_uw)$factor), directed = F)
+
+
+# Community detection using Walktrap
+stars_walktrap <- cluster_walktrap(stars_uw, weights = E(stars_uw)$weight)
+
+# Number of detected communities
+length(sizes(stars_walktrap)) #9 communities
+
+# Number of items in each community
+sizes(stars_walktrap)
+
+# Modularity of the detected community structure
+modularity(stars_walktrap)
+
+# Community membership of each STARS item
+stars_communities <- data.frame(
+  Item = V(stars_uw)$name,
+  STARS_Factor = V(stars_uw)$factor,
+  Walktrap_Community = membership(stars_walktrap)
+)
+
+print(stars_communities)
+
+table(
+  STARS_Factor = V(stars_uw)$factor,
+  Walktrap_Community = membership(stars_walktrap)
+)
+
+
+```
