@@ -10,7 +10,7 @@ Using survey responses from 182 university students, a partial-correlation netwo
 
 # Repository Contents
 
-Final Report.Rmd — R Markdown file containing the code for network construction and analysis.
+STARS Analysis.Rmd — R Markdown file containing the code for network construction and analysis.
 
 stars-data_182.csv — Dataset containing the STARS responses from 182 students.
 
@@ -18,11 +18,11 @@ $ Requirements
 
 The analysis was conducted in R using the following packages:
 
-igraph
+- igraph
 
-tidyverse
+- tidyverse
 
-bootnet
+- bootnet
 
 The rmarkdown and knitr packages are also needed to render the R Markdown file.
 
