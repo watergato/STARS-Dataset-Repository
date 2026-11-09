@@ -14,7 +14,7 @@ STARS Analysis.Rmd — R Markdown file containing the code for network construct
 
 stars-data_182.csv — Dataset containing the STARS responses from 182 students.
 
-$ Requirements
+# Requirements
 
 The analysis was conducted in R using the following packages:
 
